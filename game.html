@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homophone Challenge - Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="question-container">
+            <h2 id="questionNumber">Question 1/20</h2>
+            <div class="emoji-container">
+                <span id="questionEmoji" class="question-emoji">🐻❄️</span>
+            </div>
+            <div class="question-text">
+                <p id="questionText">Choose the correct homophone: The bear couldn't ____ the cold weather.</p>
+            </div>
+            <div class="options" id="options">
+                <button class="option" onclick="checkAnswer('bare', 'bare')">bare</button>
+                <button class="option" onclick="checkAnswer('bare', 'bear')">bear</button>
+            </div>
+            <div class="feedback" id="feedback"></div>
+        </div>
+        
+        <div class="navigation">
+            <a href="index.html" class="home-btn">🏠 Home</a>
+            <button class="next-btn" onclick="nextQuestion()">Next Question ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                emoji: '🐻❄️',
+                text: "Choose the correct homophone: The bear couldn't ____ the cold weather.",
+                options: ['bare', 'bear'],
+                correct: 'bare'
+            },
+            {
+                emoji: '👁️',
+                text: "Choose the correct homophone: I need to get my ____ tested.",
+                options: ['eye', 'i'],
+                correct: 'eye'
+            },
+            {
+                emoji: '🌊',
+                text: "Choose the correct homophone: The ship sailed across the ____ ocean.",
+                options: ['blue', 'blew'],
+                correct: 'blue'
+            },
+            {
+                emoji: '🌞',
+                text: "Choose the correct homophone: The sun ____ brightly today.",
+                options: ['shone', 'shown'],
+                correct: 'shone'
+            },
+            {
+                emoji: '📝',
+                text: "Choose the correct homophone: Please ____ your name here.",
+                options: ['write', 'right'],
+                correct: 'write'
+            },
+            {
+                emoji:'🐕',
+                text:"Choose the correct homophones:The dog wagged its_____when it saw the bone.",
+                options:['tale','tail'],
+                correct:'tail'
+            },
+            {
+                emoji:'📦',
+                text:"Choose the correct homophones:She couldn’t bear the ______ of the heavy box.",
+                options:['weight','wait'],
+                correct:'weight'
+                
+            },
+            {
+                emoji:'🍳',
+                text:"Choose the correct homophones:The chef needed more ______ for the recipe.",
+                options:['floor','flour'],
+                correct:'flour'
+            },
+            {
+                emoji:'⛵',
+                text:"Choose the correct homophones:The boat was tied to the ______ at the harbor.",
+                options:['pier','peer'],
+                correct:'pier' 
+            },
+            {
+                emoji:'🧥',
+                text:"Choose the correct homophones:He will ______ his jacket if it gets too hot.",
+                options:['ware','wear'],
+                correct:'wear' 
+            },
+            {
+                emoji:'👩‍🏫',
+                text:"Choose the correct homophones:The teacher asked us to find the ______ of the poem.",
+                options:['main','mean'],
+                correct:'main'
+            },
+            {
+                emoji:'⚒️',
+                text:"Choose the correct homophones:The carpenter hammered a nail into the wooden ______.",
+                options:['board','bored'],
+                correct:'board'
+            },
+            {
+                emoji:'🎄',
+                text:"Choose the correct homophones:The wind made the ______ of the trees sway gently.",
+                options:['bow','bough'],
+                correct:'bough'
+            },
+            {
+                emoji:'🏃‍♂️',
+                text:"Choose the correct homophones:The athlete broke the school ______ for high jump.",
+                options:['chord','record'],
+                correct:'record'
+            },
+            {
+                emoji:'✍',
+                text:"Choose the correct homophones:We need to ______ the documents before the deadline..",
+                options:['right','write'],
+                correct:'write'
+
+            }
+            
+
+
+            // Add more questions as needed to reach 20
+        ];
+
+        let currentQuestion = 0;
+
+        function displayQuestion(index) {
+            const question = questions[index];
+            document.getElementById('questionNumber').textContent = `Question ${index + 1}/${questions.length}`;
+            document.getElementById('questionEmoji').textContent = question.emoji;
+            document.getElementById('questionText').textContent = question.text;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = question.options.map(option => 
+                `<button class="option" onclick="checkAnswer('${question.correct}', '${option}')">${option}</button>`
+            ).join('');
+            
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('feedback').className = 'feedback';
+        }
+
+        function checkAnswer(correct, selected) {
+            const feedback = document.getElementById('feedback');
+            if (selected === correct) {
+                feedback.innerHTML = '✅ Congratulations! That\'s correct! 🎉';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.innerHTML = '❌ Wrong answer. Better luck next time! 🤔';
+                feedback.className = 'feedback wrong';
+            }
+            document.querySelectorAll('.option').forEach(btn => btn.disabled = true);
+        }
+
+        function nextQuestion() {
+            currentQuestion = (currentQuestion + 1) % questions.length;
+            displayQuestion(currentQuestion);
+            document.querySelectorAll('.option').forEach(btn => btn.disabled = false);
+        }
+
+        // Initialize first question
+        displayQuestion(0);
+    </script>
+</body>
+</html>

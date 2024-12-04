@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homophone Challenge</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="home-container">
+        <div class="title-container">
+            <h1 class="animate-title">Homophone Challenge</h1>
+            <div class="floating-emojis">
+                <span>📚</span>
+                <span>🎮</span>
+                <span>🎯</span>
+                <span>🏆</span>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <a href="game.html" class="start-btn">Start Game</a>
+            <button class="about-btn" onclick="toggleAbout()">About Us</button>
+        </div>
+
+        <div class="info-container">
+            <div class="info-card" data-tilt>
+                <div class="card-content">
+                    <h2>What are Homophones? 🤔</h2>
+                    <p>Homophones are words that sound the same but have different meanings and spellings. For example: 'their', 'there', and 'they're'.</p>
+                </div>
+            </div>
+            <div class="info-card" data-tilt>
+                <div class="card-content">
+                    <h2>How to Play 🎮</h2>
+                    <p>Test your knowledge of homophones through  exciting questions. Each question comes with fun emojis!</p>
+                </div>
+            </div>
+            <div class="info-card" data-tilt>
+                <div class="card-content">
+                    <h2>Challenge Yourself 🏆</h2>
+                    <p>Improve your vocabulary and spelling skills while having fun!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.5,
+        });
+
+        function toggleAbout() {
+            document.querySelector('.info-container').classList.toggle('show-about');
+        }
+
+        // Create floating background particles
+        const container = document.querySelector('.home-container');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            container.appendChild(particle);
+            animateParticle(particle);
+        }
+
+        function animateParticle(particle) {
+            const duration = Math.random() * 15 + 5;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            particle.style.animation = `float ${duration}s infinite`;
+            particle.style.left = `${x}%`;
+            particle.style.top = `${y}%`;
+        }
+    </script>
+</body>
+</html>
